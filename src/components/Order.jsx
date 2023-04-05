@@ -9,7 +9,7 @@ import {
 import OrderSummary from "./OrderSummary/OrderSummary";
 
 const Order = () => {
-  const loadedData = useLoaderData();
+  const { loadedData } = useLoaderData();
   const [products, setProducts] = useState([]);
   const [cart, setCart] = useState([]);
 
@@ -64,7 +64,12 @@ const Order = () => {
         </div>
         <div className="col-span-1 bg-orange-300 p-4">
           <div className="sticky top-5">
-            <OrderSummary cart={cart} clearCart={clearCart} />
+            <OrderSummary
+              cart={cart}
+              clearCart={clearCart}
+              to="/orderReview"
+              text="Order Review"
+            />
           </div>
         </div>
       </div>

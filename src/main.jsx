@@ -11,6 +11,7 @@ import ManageInventory from "./components/ManageInventory";
 import LogIn from "./components/LogIn";
 import Error from "./components/Error/Error";
 import ProductDetails from "./components/ProductDetails/ProductDetails";
+import cardsProductLoader from "./cardsProductLoader/cardsProductLoader";
 const router = createBrowserRouter([
   {
     path: "/",
@@ -23,12 +24,12 @@ const router = createBrowserRouter([
       {
         path: "/order",
         element: <Order />,
-        loader: () => fetch("products.json"),
+        loader: cardsProductLoader,
       },
       {
         path: "/orderReview",
         element: <OrderReview />,
-        loader: () => fetch("products.json"),
+        loader: cardsProductLoader,
       },
       {
         path: "/inventory",

@@ -3,7 +3,8 @@ import { faTrashCan } from "@fortawesome/free-regular-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faArrowRight } from "@fortawesome/free-solid-svg-icons";
 import { useNavigate } from "react-router-dom";
-const OrderSummary = ({ cart, clearCart }) => {
+
+const OrderSummary = ({ cart, clearCart, to, text }) => {
   let totalProduct = 0;
   let totalPrice = 0;
   let totalShipping = 0;
@@ -17,7 +18,7 @@ const OrderSummary = ({ cart, clearCart }) => {
   //redirect to Order Review
   const navigateToReviewOrder = useNavigate();
   const gotoOrderReview = () => {
-    navigateToReviewOrder("/orderReview");
+    navigateToReviewOrder(to);
   };
 
   return (
@@ -44,7 +45,7 @@ const OrderSummary = ({ cart, clearCart }) => {
           onClick={gotoOrderReview}
           className="btn w-full bg-amber-600 border-0 hover:bg-amber-700"
         >
-          Order review
+          {text}
           <span className="ml-4">
             <FontAwesomeIcon icon={faArrowRight} />
           </span>

@@ -9,7 +9,13 @@ const handleQuantity = id => {
   }
   localStorage.setItem("cart-item", JSON.stringify(getData));
 };
-
+const deleteCartFromBd = id => {
+  const shoppingCart = getLocalData();
+  if (id in shoppingCart) {
+    delete shoppingCart[id];
+    localStorage.setItem("cart-item", JSON.stringify(shoppingCart));
+  }
+};
 const getLocalData = () => {
   let products = {};
   const localData = localStorage.getItem("cart-item");
@@ -22,4 +28,5 @@ const getLocalData = () => {
 const clearCartFromBd = () => {
   localStorage.removeItem("cart-item");
 };
-export { handleQuantity, getLocalData, clearCartFromBd };
+
+export { handleQuantity, getLocalData, clearCartFromBd, deleteCartFromBd };
