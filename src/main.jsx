@@ -10,10 +10,11 @@ import OrderReview from "./components/OrderReview";
 import ManageInventory from "./components/ManageInventory";
 import LogIn from "./components/LogIn";
 import Error from "./components/Error/Error";
-import ProductDetails from "./components/ProductDetails/ProductDetails";
 import cardsProductLoader from "./cardsProductLoader/cardsProductLoader";
 import Register from "./components/Register/Register";
 import AuthProvider from "./provider/AuthProvider";
+import PrivateRoute from "./components/PrivateRoute/PrivateRoute";
+import Checkout from "./components/Checkout/Checkout";
 const router = createBrowserRouter([
   {
     path: "/",
@@ -35,7 +36,11 @@ const router = createBrowserRouter([
       },
       {
         path: "/inventory",
-        element: <ManageInventory />,
+        element: (
+          <PrivateRoute>
+            <ManageInventory></ManageInventory>
+          </PrivateRoute>
+        ),
       },
       {
         path: "/login",
@@ -44,6 +49,14 @@ const router = createBrowserRouter([
       {
         path: "/register",
         element: <Register />,
+      },
+      {
+        path: "/checkout",
+        element: (
+          <PrivateRoute>
+            <Checkout></Checkout>
+          </PrivateRoute>
+        ),
       },
       {
         path: "*",

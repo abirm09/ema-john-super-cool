@@ -48,8 +48,8 @@ const OrderReview = () => {
             <OrderSummary
               cart={cart}
               clearCart={clearCart}
-              to="/order"
-              text="Add new"
+              to="/checkout"
+              text="Checkout"
             />
           </div>
         </div>

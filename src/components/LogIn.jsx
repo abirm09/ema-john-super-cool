@@ -1,11 +1,15 @@
 import React, { useContext, useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 import google from "../assets/google.png";
 import "./login.css";
 import { AuthContext } from "../provider/AuthProvider";
 const LogIn = () => {
   const [logInStatus, setLogInStatus] = useState("");
   const { signIn } = useContext(AuthContext);
+  const location = useLocation();
+  console.log(location?.state?.from?.pathname);
+  const from = location?.state?.from?.pathname || "/";
+  const navigate = useNavigate();
   const handleSignIn = event => {
     event.preventDefault();
     const form = event.target;
@@ -17,6 +21,7 @@ const LogIn = () => {
         console.log(user);
         setLogInStatus("Logged in successful");
         form.reset();
+        navigate(from, { replace: true });
       })
       .catch(err => {
         setLogInStatus(err.message);
