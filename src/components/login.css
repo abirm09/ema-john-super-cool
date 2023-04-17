@@ -1,0 +1,11 @@
+.log-in-form::before {
+  content: "";
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  background: #ffe0b3;
+  left: -20px;
+  top: 20px;
+  z-index: -2;
+  border-radius: 12px;
+}

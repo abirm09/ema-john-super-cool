@@ -1,33 +1,42 @@
 import React, { useContext, useState } from "react";
 import { Link } from "react-router-dom";
-import google from "../assets/google.png";
-import "./login.css";
-import { AuthContext } from "../provider/AuthProvider";
-const LogIn = () => {
-  const [logInStatus, setLogInStatus] = useState("");
-  const { signIn } = useContext(AuthContext);
-  const handleSignIn = event => {
+import google from "../../assets/google.png";
+import { AuthContext } from "../../provider/AuthProvider";
+const Register = () => {
+  const [passwordStrength, setPasswordStrength] = useState("");
+  const { emailPasswordAuth } = useContext(AuthContext);
+
+  const handleLogIn = event => {
     event.preventDefault();
     const form = event.target;
     const email = form.email.value;
     const password = form.password.value;
-    signIn(email, password)
+    const confirm = form.confirm.value;
+    setPasswordStrength("");
+    if (password.length < 7) {
+      setPasswordStrength("Password should greater than 6 digit");
+      return;
+    }
+    if (password !== confirm) {
+      setPasswordStrength("Password did not match.");
+      return;
+    }
+    emailPasswordAuth(email, password)
       .then(result => {
         const user = result.user;
-        console.log(user);
-        setLogInStatus("Logged in successful");
-        form.reset();
+        console.log(result);
       })
       .catch(err => {
-        setLogInStatus(err.message);
+        setPasswordStrength(err.message);
         console.log(err);
       });
+    console.log(email, password, confirm);
   };
   return (
     <div className="max-w-7sl mx-auto px-2 flex justify-center mt-10">
       <div className="max-w-[500px] border w-full p-10  rounded-xl log-in-form relative bg-white">
-        <h2 className="text-center font-lato text-4xl">Login</h2>
-        <form className="space-y-5" onSubmit={handleSignIn}>
+        <h2 className="text-center font-lato text-4xl">Register</h2>
+        <form className="space-y-5" onSubmit={handleLogIn}>
           <div>
             <label htmlFor="email" className="block">
               Email
@@ -50,6 +59,17 @@ const LogIn = () => {
               name="password"
             />
           </div>
+          <div>
+            <label htmlFor="password" className="block">
+              Confirm Password
+            </label>
+            <input
+              type="password"
+              placeholder="Type here"
+              className="input input-bordered w-full"
+              name="confirm"
+            />
+          </div>
           <input
             type="submit"
             value="Log in"
@@ -58,9 +78,9 @@ const LogIn = () => {
         </form>
         <div>
           <p className="font-lato text-center mt-5">
-            New to ema-john?{" "}
-            <Link to="/register" className="text-orange-400">
-              Create new account.
+            Already have an account?{" "}
+            <Link to="/login" className="text-orange-400">
+              Login.
             </Link>
           </p>
         </div>
@@ -78,10 +98,10 @@ const LogIn = () => {
             <span className="text-black">Continue with google</span>
           </button>
         </div>
-        {logInStatus}
+        <p className="text-red-600 font-bold">{passwordStrength}</p>
       </div>
     </div>
   );
 };
 
-export default LogIn;
+export default Register;

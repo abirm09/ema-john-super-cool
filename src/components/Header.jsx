@@ -1,7 +1,14 @@
-import React from "react";
+import React, { useContext } from "react";
 import ActiveLink from "./ActiveLink/ActiveLink";
 import logo from "../assets/logo/Logo.svg";
+import { AuthContext } from "../provider/AuthProvider";
 const Header = () => {
+  const { user, logOut } = useContext(AuthContext);
+  const handleLogOut = () => {
+    logOut()
+      .then(result => {})
+      .catch(err => console.log(err));
+  };
   return (
     <div className=" bg-slate-800">
       <div className="navbar container mx-auto px-2">
@@ -30,6 +37,7 @@ const Header = () => {
               <li>
                 <ActiveLink to="/">Home</ActiveLink>
               </li>
+
               <li>
                 <ActiveLink to="/order">Order</ActiveLink>
               </li>
@@ -38,6 +46,12 @@ const Header = () => {
               </li>
               <li>
                 <ActiveLink to="/inventory">Manage Inventory</ActiveLink>
+              </li>
+              <li>
+                <ActiveLink to="/login">Log in</ActiveLink>
+              </li>
+              <li>
+                <ActiveLink to="/register">Register</ActiveLink>
               </li>
             </ul>
           </div>
@@ -59,6 +73,25 @@ const Header = () => {
             <li>
               <ActiveLink to="/inventory">Manage Inventory</ActiveLink>
             </li>
+            {user ? (
+              ""
+            ) : (
+              <>
+                <li>
+                  <ActiveLink to="/login">Log in</ActiveLink>
+                </li>
+                <li>
+                  <ActiveLink to="/register">Register</ActiveLink>
+                </li>
+              </>
+            )}
+            {user ? (
+              <li>
+                {user.email} <button onClick={handleLogOut}>LogOut</button>
+              </li>
+            ) : (
+              ""
+            )}
           </ul>
         </div>
       </div>
