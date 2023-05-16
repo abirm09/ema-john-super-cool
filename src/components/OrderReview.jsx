@@ -19,7 +19,7 @@ const OrderReview = () => {
     clearCartFromBd();
   };
   const handleDeleteProduct = id => {
-    const filteredItem = cart.filter(pd => pd.id != id);
+    const filteredItem = cart.filter(pd => pd._id != id);
     setCart(filteredItem);
     deleteCartFromBd(id);
   };
@@ -36,7 +36,7 @@ const OrderReview = () => {
           ) : (
             cart.map(product => (
               <ReviewItem
-                key={product.id}
+                key={product._id}
                 product={product}
                 handleDelete={handleDeleteProduct}
               />

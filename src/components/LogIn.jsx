@@ -5,9 +5,9 @@ import "./login.css";
 import { AuthContext } from "../provider/AuthProvider";
 const LogIn = () => {
   const [logInStatus, setLogInStatus] = useState("");
+  const [show, setShow] = useState(false);
   const { signIn } = useContext(AuthContext);
   const location = useLocation();
-  console.log(location?.state?.from?.pathname);
   const from = location?.state?.from?.pathname || "/";
   const navigate = useNavigate();
   const handleSignIn = event => {
@@ -49,12 +49,15 @@ const LogIn = () => {
               Password
             </label>
             <input
-              type="password"
+              type={show ? "text" : "password"}
               placeholder="Type here"
               className="input input-bordered w-full"
               name="password"
             />
           </div>
+          <p onClick={() => setShow(!show)}>
+            <small>{show ? "Hide" : "Show"}</small>
+          </p>
           <input
             type="submit"
             value="Log in"

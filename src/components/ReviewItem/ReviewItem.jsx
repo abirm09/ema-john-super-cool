@@ -2,7 +2,7 @@ import React from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faDeleteLeft, faTrashCan } from "@fortawesome/free-solid-svg-icons";
 const ReviewItem = ({ product, handleDelete }) => {
-  const { id, name, price, quantity, img, shipping } = product;
+  const { _id, name, price, quantity, img, shipping } = product;
   return (
     <div className="grid grid-cols-5 max-w-xl border-2 border-gray-300 rounded-md p-2 items-center mx-auto">
       <div className="col-span-1 w-24">
@@ -23,7 +23,7 @@ const ReviewItem = ({ product, handleDelete }) => {
       </div>
       <div className="col-span-1">
         <button
-          onClick={() => handleDelete(id)}
+          onClick={() => handleDelete(_id)}
           className="bg-red-200 w-10 h-10 rounded-full fa-1xansition-all"
         >
           <FontAwesomeIcon icon={faTrashCan} />
